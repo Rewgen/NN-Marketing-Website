@@ -17,9 +17,23 @@ const focus = [
   "Digitalisierung",
   "Prozessoptimierung",
   "KI & Automatisierung",
-  "Kommunikation",
-  "Organisation",
+  "Stakeholder-Kommunikation",
+  "Donor Engagement",
 ];
+
+const categoryLabels: Record<ResumeEntry["category"], string> = {
+  work: "Berufserfahrung",
+  training: "Weiterbildung",
+  education: "Ausbildung",
+};
+
+const grouped = (["work", "training", "education"] as const).map((cat) => ({
+  label: categoryLabels[cat],
+  entries: items.filter((e) => e.category === cat),
+})).filter((g) => g.entries.length > 0);
+
+// For the preview timeline: show work entries only, max 3
+const previewItems = items.filter((e) => e.category === "work").slice(0, 3);
 ---
 
 <Section id="resume" labelledby="resume-title">
@@ -35,7 +49,7 @@ const focus = [
 
   <ol class="mt-10 max-w-xl">
     {
-      items.map((e, i) => (
+      previewItems.map((e, i) => (
         <li
           class="relative border-l border-line pb-9 pl-7 last:border-l-transparent last:pb-0"
           data-reveal
@@ -44,6 +58,7 @@ const focus = [
           <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
           <p class="text-xs font-medium text-accent">{e.period}</p>
           <h3 class="mt-1 text-base font-medium text-ink">{e.role}</h3>
+          {e.org && <p class="mt-0.5 text-xs font-medium text-accent-deep">{e.org}</p>}
           <p class="mt-1 text-sm leading-relaxed text-muted">{e.description}</p>
         </li>
       ))
@@ -84,16 +99,45 @@ const focus = [
     </ul>
   </div>
 
-  <ol class="mt-10 max-w-2xl">
+  <div class="mt-10 space-y-12 max-w-2xl">
     {
-      items.map((e) => (
-        <li class="relative border-l border-line pb-10 pl-8 last:border-l-transparent last:pb-0">
-          <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
-          <p class="text-sm font-medium text-accent">{e.period}</p>
-          <h3 class="mt-1 font-display text-xl font-medium text-ink">{e.role}</h3>
-          <p class="mt-2 text-base leading-relaxed text-muted">{e.description}</p>
-        </li>
+      grouped.map((group) => (
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent-deep mb-6">
+            {group.label}
+          </p>
+          <ol>
+            {group.entries.map((e) => (
+              <li class="relative border-l border-line pb-10 pl-8 last:border-l-transparent last:pb-0">
+                <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
+                <p class="text-sm font-medium text-accent">{e.period}</p>
+                <h3 class="mt-1 font-display text-xl font-medium text-ink">{e.role}</h3>
+                {e.org && (
+                  <p class="mt-0.5 text-sm font-medium text-accent-deep">{e.org}</p>
+                )}
+                <p class="mt-2 text-base leading-relaxed text-muted">{e.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       ))
     }
-  </ol>
+  </div>
+
+  <div class="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl">
+    <div class="rounded-2xl border border-line bg-surface p-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent-deep mb-3">Sprachen</p>
+      <ul class="space-y-1 text-sm text-muted">
+        <li><span class="font-medium text-ink">Deutsch</span> – Muttersprache</li>
+        <li><span class="font-medium text-ink">Englisch</span> – Gute Kenntnisse</li>
+      </ul>
+    </div>
+    <div class="rounded-2xl border border-line bg-surface p-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.14em] text-accent-deep mb-3">Meine Werte</p>
+      <ul class="space-y-1 text-sm text-muted">
+        <li><span class="font-medium text-ink">Disziplin</span></li>
+        <li><span class="font-medium text-ink">Menschlichkeit</span></li>
+      </ul>
+    </div>
+  </div>
 </Modal>
