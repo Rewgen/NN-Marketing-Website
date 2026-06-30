@@ -25,7 +25,7 @@ export const site: SiteConfig = {
   ],
   contact: {
     email: "hallo@nilsnegwer.de",
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://nilsnegwer-fuer-lsb.de/",
     cvHref: "/downloads/lebenslauf.pdf",
   },
 };
