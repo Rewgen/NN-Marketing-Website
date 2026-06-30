@@ -1,0 +1,38 @@
+---
+import Icon from "../ui/Icon.astro";
+import { site } from "../../data/site";
+---
+
+<section id="contact" class="bg-accent text-white" aria-labelledby="contact-title">
+  <div class="mx-auto max-w-6xl px-6 py-20 text-center sm:px-8 sm:py-28" data-reveal>
+    <h2 id="contact-title" class="font-display text-3xl font-medium sm:text-4xl">
+      Lass uns sprechen.
+    </h2>
+    <p class="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/80">
+      Ich freue mich auf neue Herausforderungen und spannende Projekte.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={`mailto:${site.contact.email}`}
+        class="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-medium text-accent-deep transition hover:bg-white/90"
+      >
+        <Icon name="mail" class="h-4 w-4" /> E-Mail
+      </a>
+      <a
+        href={site.contact.linkedin}
+        class="inline-flex items-center gap-2 rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+        rel="noopener"
+        target="_blank"
+      >
+        <Icon name="linkedin" class="h-4 w-4" /> LinkedIn
+      </a>
+      <a
+        href={site.contact.cvHref}
+        class="inline-flex items-center gap-2 rounded-lg border border-white/40 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+      >
+        <Icon name="download" class="h-4 w-4" /> Lebenslauf
+      </a>
+    </div>
+  </div>
+</section>

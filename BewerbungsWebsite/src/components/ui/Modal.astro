@@ -1,0 +1,76 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  id: string;
+  size?: "md" | "full";
+  labelledby?: string;
+}
+
+const { id, size = "md", labelledby } = Astro.props;
+---
+
+<dialog id={id} class:list={["modal", size === "full" && "modal-full"]} aria-labelledby={labelledby}>
+  <div class="modal-inner">
+    <div class="modal-bar">
+      <button type="button" data-modal-close class="modal-close" aria-label="Schließen">
+        <Icon name="x" class="h-5 w-5" />
+      </button>
+    </div>
+    <div class="modal-content">
+      <slot />
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal {
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: 100%;
+    max-width: min(92vw, 760px);
+    max-height: 90vh;
+  }
+  .modal-full {
+    max-width: min(96vw, 1080px);
+  }
+  .modal::backdrop {
+    background: rgba(20, 20, 20, 0.55);
+    backdrop-filter: blur(6px);
+  }
+  .modal-inner {
+    display: flex;
+    max-height: 90vh;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--color-surface);
+    box-shadow: 0 24px 70px -20px rgba(31, 31, 31, 0.35);
+  }
+  .modal-bar {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    padding: 14px 14px 0;
+  }
+  .modal-close {
+    display: grid;
+    height: 38px;
+    width: 38px;
+    place-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: 9999px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .modal-close:hover {
+    background: var(--color-canvas);
+  }
+  .modal-content {
+    overflow-y: auto;
+    padding: 0 clamp(24px, 5vw, 56px) clamp(28px, 5vw, 56px);
+  }
+</style>

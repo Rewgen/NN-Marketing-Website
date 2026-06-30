@@ -1,0 +1,38 @@
+---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import Icon from "./Icon.astro";
+
+interface Props {
+  text?: string;
+  note?: string;
+  image?: string;
+}
+
+const { text = "In Kürze mehr", note = "Dieser Bereich wird gerade aufgebaut.", image } =
+  Astro.props;
+
+/*
+  Wenn ein Bild (z. B. ein Bagger-PNG) übergeben wird oder public/bagger.png
+  existiert, wird es als Marker genutzt — sonst ein dezentes Bau-Icon.
+*/
+const baggerExists = existsSync(join(process.cwd(), "public", "bagger.png"));
+const marker = image ?? (baggerExists ? "/bagger.png" : null);
+---
+
+<div
+  class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-line py-16 text-center"
+  data-reveal
+>
+  {
+    marker ? (
+      <img src={marker} alt="" width="96" height="96" class="h-20 w-auto opacity-90" />
+    ) : (
+      <span class="grid h-14 w-14 place-items-center rounded-full bg-accent-tint text-accent">
+        <Icon name="construction" class="h-7 w-7" />
+      </span>
+    )
+  }
+  <p class="font-display text-2xl text-ink">{text}</p>
+  <p class="text-sm text-muted">{note}</p>
+</div>

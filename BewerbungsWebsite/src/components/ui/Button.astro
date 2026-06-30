@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "ghost";
+  icon?: string;
+  iconPosition?: "left" | "right";
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = "primary",
+  icon,
+  iconPosition = "right",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const base =
+  "group inline-flex items-center gap-2 rounded-lg text-sm font-medium transition-all duration-200";
+
+const variants: Record<string, string> = {
+  primary: "bg-accent text-white px-5 py-3 hover:bg-accent-deep",
+  secondary:
+    "bg-surface text-ink border border-line px-5 py-3 hover:border-accent hover:text-accent-deep",
+  ghost: "text-accent-deep hover:gap-3",
+};
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag href={href} class:list={[base, variants[variant], className]} {...rest}>
+  {icon && iconPosition === "left" && <Icon name={icon} class="h-4 w-4" />}
+  <slot />
+  {
+    icon && iconPosition === "right" && (
+      <Icon
+        name={icon}
+        class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      />
+    )
+  }
+</Tag>

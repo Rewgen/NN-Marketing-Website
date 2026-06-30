@@ -1,0 +1,202 @@
+---
+import Button from "../ui/Button.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import Icon from "../ui/Icon.astro";
+import { getMyselfImages } from "../../lib/images";
+
+const images = getMyselfImages();
+const multiple = images.length > 1;
+---
+
+<section id="hero" class="relative bg-canvas">
+  <span id="top" class="sr-only">Seitenanfang</span>
+  <div class="mx-auto max-w-6xl px-6 pt-16 pb-20 sm:px-8 sm:pt-24 sm:pb-28">
+    <div class="flex flex-col items-center gap-10 md:flex-row md:gap-14">
+      <div class="shrink-0">
+        <div id="hero-figure" class="inline-flex flex-col items-center">
+          <div class="hero-stage-wrap group relative">
+            <button
+              type="button"
+              data-hero-stage
+              id="hero-portrait"
+              class="hero-portrait"
+              aria-label="Nächstes Bild"
+            >
+              {
+                images.map((img, i) => (
+                  <img
+                    src={img.src}
+                    alt={i === 0 ? "Porträt von Nils Negwer" : ""}
+                    data-hero-slide={i}
+                    width="460"
+                    height="460"
+                    fetchpriority={i === 0 ? "high" : undefined}
+                    hidden={i !== 0}
+                    class="absolute inset-0 h-full w-full object-cover"
+                  />
+                ))
+              }
+            </button>
+
+            {
+              multiple && (
+                <Fragment>
+                  <button
+                    type="button"
+                    data-hero-prev
+                    class="hero-arrow hero-arrow-left"
+                    aria-label="Vorheriges Bild"
+                  >
+                    <Icon name="chevron-left" class="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    data-hero-next
+                    class="hero-arrow hero-arrow-right"
+                    aria-label="Nächstes Bild"
+                  >
+                    <Icon name="chevron-right" class="h-5 w-5" />
+                  </button>
+                </Fragment>
+              )
+            }
+          </div>
+
+          {
+            multiple && (
+              <div class="hero-dots" aria-hidden="true">
+                {images.map((_, i) => (
+                  <span data-hero-dot={i} class:list={["hero-dot", i === 0 && "is-active"]} />
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="text-center md:text-left" data-reveal>
+        <Eyebrow class="justify-center md:justify-start">Hallo, ich bin</Eyebrow>
+        <h1
+          class="mt-4 font-display text-5xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl"
+        >
+          Nils Negwer.
+        </h1>
+        <p class="mt-5 font-display text-xl font-normal leading-relaxed text-ink sm:text-2xl">
+          Projektorganisation.<br />Digitalisierung.<br />Menschen verbinden.
+        </p>
+        <p class="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted md:mx-0">
+          Ich strukturiere komplexe Vorhaben, digitalisiere Prozesse und bringe Menschen
+          zusammen — mit klarem Blick für das Wesentliche.
+        </p>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-start">
+          <Button href="#about" icon="arrow-down">Mehr über mich</Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-portrait {
+    position: relative;
+    display: block;
+    width: clamp(220px, 34vw, 460px);
+    height: clamp(220px, 34vw, 460px);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 9999px;
+    background: var(--color-surface);
+    cursor: pointer;
+    will-change: transform;
+  }
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    height: 38px;
+    width: 38px;
+    place-items: center;
+    border: none;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-ink);
+    cursor: pointer;
+    opacity: 0;
+    box-shadow: 0 2px 12px rgba(31, 31, 31, 0.16);
+    transition: opacity 0.2s ease;
+  }
+  .hero-stage-wrap:hover .hero-arrow,
+  .hero-arrow:focus-visible {
+    opacity: 1;
+  }
+  .hero-arrow-left {
+    left: 12px;
+  }
+  .hero-arrow-right {
+    right: 12px;
+  }
+  .hero-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+  }
+  .hero-dot {
+    height: 7px;
+    width: 7px;
+    border-radius: 9999px;
+    background: var(--color-line);
+    transition:
+      width 0.25s ease,
+      background 0.25s ease;
+  }
+  .hero-dot.is-active {
+    width: 18px;
+    background: var(--color-accent);
+  }
+</style>
+
+<script>
+  const figure = document.getElementById("hero-figure");
+  if (figure) {
+    const slides = Array.from(figure.querySelectorAll("[data-hero-slide]"));
+    const dots = Array.from(figure.querySelectorAll("[data-hero-dot]"));
+    let idx = 0;
+    let idleTimer: number | undefined;
+
+    const render = () => {
+      slides.forEach((s, i) => s.toggleAttribute("hidden", i !== idx));
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
+    };
+
+    const scheduleReset = () => {
+      window.clearTimeout(idleTimer);
+      if (idx !== 0) {
+        idleTimer = window.setTimeout(() => {
+          idx = 0;
+          render();
+        }, 5000);
+      }
+    };
+
+    const go = (n: number) => {
+      idx = (n + slides.length) % slides.length;
+      render();
+      scheduleReset();
+    };
+
+    if (slides.length > 1) {
+      figure.querySelector("[data-hero-stage]")?.addEventListener("click", () => go(idx + 1));
+      figure.querySelector("[data-hero-next]")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        go(idx + 1);
+      });
+      figure.querySelector("[data-hero-prev]")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        go(idx - 1);
+      });
+    }
+  }
+</script>

@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/*
+  Design-Tokens werden über die @theme-Schicht an Tailwind übergeben, zeigen
+  aber auf "rohe" CSS-Variablen (--c-*, --f-*). Dadurch lässt sich das gesamte
+  Grundgerüst pro Bewerbungsseite umfärben: einfach data-theme="lsb" am <html>
+  setzen und unten einen [data-theme="lsb"]-Block mit eigenen Werten ergänzen.
+*/
+@theme {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-accent: var(--c-accent);
+  --color-accent-deep: var(--c-accent-deep);
+  --color-accent-tint: var(--c-accent-tint);
+
+  --font-sans: var(--f-body);
+  --font-display: var(--f-display);
+}
+
+@layer base {
+  :root,
+  [data-theme="default"] {
+    --c-canvas: #f7f7f5;
+    --c-surface: #ffffff;
+    --c-ink: #1f1f1f;
+    --c-muted: #6b6b6b;
+    --c-line: #e5e5e5;
+    --c-accent: #3e6b73;
+    --c-accent-deep: #2f545a;
+    --c-accent-tint: #eaf0f0;
+
+    --f-body: "Inter", system-ui, -apple-system, sans-serif;
+    --f-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  }
+
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  ::selection {
+    background: var(--color-accent-tint);
+    color: var(--color-accent-deep);
+  }
+}
+
+/* Skip-Link für Tastatur- und Screenreader-Nutzung */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/*
+  Scroll-Reveal: Elemente starten erst dann versteckt, wenn JS die Klasse
+  .reveal-ready an <html> gesetzt hat. Ohne JS (oder bei reduzierter Bewegung)
+  bleibt alles sofort sichtbar.
+*/
+html.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+html.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  html.reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

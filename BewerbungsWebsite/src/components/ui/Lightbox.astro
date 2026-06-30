@@ -1,0 +1,165 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  images: { src: string; alt: string }[];
+  id?: string;
+  trigger?: boolean;
+  label?: string;
+}
+
+const {
+  images = [],
+  id = "lb-" + Math.random().toString(36).slice(2, 9),
+  trigger = true,
+  label = "Mehr Eindrücke",
+} = Astro.props;
+
+const multiple = images.length > 1;
+---
+
+{
+  trigger && (
+    <button
+      type="button"
+      data-lb-open={id}
+      class="group inline-flex items-center gap-2 text-sm font-medium text-accent-deep transition-all hover:gap-3"
+    >
+      {label}
+      <Icon name="arrow-right" class="h-4 w-4" />
+    </button>
+  )
+}
+
+<dialog id={id} class="lightbox" aria-label="Bildergalerie">
+  <div class="lb-inner">
+    <button type="button" data-lb-close class="lb-btn lb-close" aria-label="Schließen">
+      <Icon name="x" class="h-5 w-5" />
+    </button>
+    {
+      multiple && (
+        <Fragment>
+          <button type="button" data-lb-prev class="lb-btn lb-prev" aria-label="Vorheriges Bild">
+            <Icon name="chevron-left" class="h-6 w-6" />
+          </button>
+          <button type="button" data-lb-next class="lb-btn lb-next" aria-label="Nächstes Bild">
+            <Icon name="chevron-right" class="h-6 w-6" />
+          </button>
+        </Fragment>
+      )
+    }
+    <figure class="lb-figure">
+      {
+        images.map((img, i) => (
+          <img src={img.src} alt={img.alt} data-lb-slide={i} hidden={i !== 0} class="lb-img" />
+        ))
+      }
+    </figure>
+    {
+      multiple && (
+        <p class="lb-counter">
+          <span data-lb-current>1</span> / {images.length}
+        </p>
+      )
+    }
+  </div>
+</dialog>
+
+<style>
+  .lightbox {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: min(92vw, 1000px);
+    max-height: 90vh;
+  }
+  .lightbox::backdrop {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(6px);
+  }
+  .lb-inner {
+    position: relative;
+  }
+  .lb-figure {
+    margin: 0;
+  }
+  .lb-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 86vh;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .lb-btn {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 9999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    color: #1f1f1f;
+    cursor: pointer;
+  }
+  .lb-close {
+    top: 12px;
+    right: 12px;
+  }
+  .lb-prev {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lb-next {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lb-counter {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 12px;
+    border-radius: 9999px;
+  }
+</style>
+
+<script define:vars={{ id }}>
+  const dlg = document.getElementById(id);
+  if (dlg) {
+    const slides = Array.from(dlg.querySelectorAll("[data-lb-slide]"));
+    const current = dlg.querySelector("[data-lb-current]");
+    let idx = 0;
+
+    const show = (n) => {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => s.toggleAttribute("hidden", i !== idx));
+      if (current) current.textContent = String(idx + 1);
+    };
+
+    document.querySelectorAll('[data-lb-open="' + id + '"]').forEach((b) =>
+      b.addEventListener("click", () => {
+        show(0);
+        dlg.showModal();
+      })
+    );
+
+    dlg.querySelector("[data-lb-close]")?.addEventListener("click", () => dlg.close());
+    dlg.querySelector("[data-lb-next]")?.addEventListener("click", () => show(idx + 1));
+    dlg.querySelector("[data-lb-prev]")?.addEventListener("click", () => show(idx - 1));
+    dlg.addEventListener("click", (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+    dlg.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") show(idx + 1);
+      if (e.key === "ArrowLeft") show(idx - 1);
+    });
+  }
+</script>

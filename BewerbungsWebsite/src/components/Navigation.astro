@@ -1,0 +1,101 @@
+---
+import Icon from "./ui/Icon.astro";
+import { site } from "../data/site";
+---
+
+<header id="site-nav" class="sticky top-0 z-50 transition-all duration-300">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
+    <a href="#top" class="group flex items-center gap-2.5">
+      <span
+        id="nav-avatar"
+        class="nav-avatar grid place-items-center overflow-hidden rounded-full bg-accent-tint"
+        aria-hidden="true"
+      >
+        <img src="/imagesMyself/me.png" alt="" width="32" height="32" class="h-full w-full object-cover" />
+      </span>
+      <span class="text-sm font-medium uppercase tracking-[0.08em] text-ink">{site.name}</span>
+    </a>
+
+    <ul class="hidden items-center gap-7 text-sm text-muted md:flex">
+      {
+        site.nav.map((i) => (
+          <li>
+            <a href={i.href} class="transition-colors hover:text-accent-deep">
+              {i.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button
+      id="nav-toggle"
+      class="text-ink md:hidden"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Icon name="menu" class="h-6 w-6" />
+    </button>
+  </nav>
+
+  <div id="mobile-menu" hidden class="border-t border-line bg-surface md:hidden">
+    <ul class="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
+      {
+        site.nav.map((i) => (
+          <li>
+            <a href={i.href} class="block py-2 text-base text-ink" data-nav-link>
+              {i.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<style>
+  #site-nav {
+    background: transparent;
+  }
+  #site-nav.is-scrolled {
+    background: color-mix(in srgb, var(--color-canvas) 82%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav-avatar {
+    width: 0;
+    height: 32px;
+    opacity: 0;
+    transition:
+      width 0.3s ease,
+      opacity 0.3s ease;
+  }
+  #site-nav.is-scrolled .nav-avatar {
+    width: 32px;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("nav-toggle");
+  const menu = document.getElementById("mobile-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      const closed = menu.hasAttribute("hidden");
+      if (closed) {
+        menu.removeAttribute("hidden");
+        btn.setAttribute("aria-expanded", "true");
+      } else {
+        menu.setAttribute("hidden", "");
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+    menu.querySelectorAll("[data-nav-link]").forEach((a) =>
+      a.addEventListener("click", () => {
+        menu.setAttribute("hidden", "");
+        btn.setAttribute("aria-expanded", "false");
+      })
+    );
+  }
+</script>

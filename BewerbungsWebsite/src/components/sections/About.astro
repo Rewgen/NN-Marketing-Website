@@ -1,0 +1,103 @@
+---
+import Section from "../ui/Section.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import Button from "../ui/Button.astro";
+import Modal from "../ui/Modal.astro";
+
+const traits = [
+  {
+    title: "Organisiert",
+    text: "Ich strukturiere komplexe Vorhaben, behalte Deadlines im Blick und sorge für klare Abläufe.",
+  },
+  {
+    title: "Kommunikativ",
+    text: "Ich verbinde Menschen, fördere den Austausch und schaffe Verständnis auf allen Ebenen.",
+  },
+  {
+    title: "Lösungsorientiert",
+    text: "Ich denke mit, hinterfrage und entwickle Lösungen, die wirklich weiterbringen.",
+  },
+];
+
+const values = [
+  { title: "Klarheit", text: "Aus Komplexität das Wesentliche herausarbeiten." },
+  { title: "Verbindlichkeit", text: "Zusagen halten und Verantwortung übernehmen." },
+  { title: "Wirkung", text: "Lösungen, die im Alltag wirklich tragen." },
+];
+---
+
+<Section id="about" labelledby="about-title">
+  <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+    <div data-reveal>
+      <Eyebrow>Über mich</Eyebrow>
+      <h2
+        id="about-title"
+        class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-ink sm:text-4xl"
+      >
+        Den Überblick behalten. Verantwortung übernehmen. Wirkung schaffen.
+      </h2>
+      <div class="mt-5 max-w-md space-y-4 text-base leading-relaxed text-muted">
+        <p>
+          Ich arbeite an der Schnittstelle von Menschen, Prozessen und Technologie. Struktur,
+          Kommunikation und Umsetzung sind für mich der Schlüssel zu Projekten, die wirken.
+        </p>
+        <p>
+          Mein Antrieb ist es, Komplexes greifbar zu machen — und aus vielen Einzelteilen ein
+          klares, funktionierendes Ganzes zu formen.
+        </p>
+      </div>
+      <Button type="button" variant="ghost" icon="arrow-right" class="mt-6" data-modal-open="about-modal">
+        Mehr erfahren
+      </Button>
+    </div>
+
+    <ul class="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-line">
+      {
+        traits.map((t) => (
+          <li class="bg-surface p-6" data-reveal>
+            <h3 class="font-display text-lg font-medium text-ink">{t.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{t.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<Modal id="about-modal" size="md" labelledby="about-modal-title">
+  <Eyebrow>Über mich</Eyebrow>
+  <h2 id="about-modal-title" class="mt-4 font-display text-3xl font-medium tracking-tight text-ink">
+    Mehr über mich.
+  </h2>
+  <div class="mt-6 space-y-4 text-base leading-relaxed text-muted">
+    <p>
+      Ich bin gern dort, wo Menschen, Prozesse und Technologie zusammenkommen — und sorge dafür,
+      dass aus vielen Einzelteilen ein klares, funktionierendes Ganzes wird.
+    </p>
+    <p>
+      Komplexe Vorhaben strukturiere ich so, dass alle Beteiligten wissen, worauf es ankommt. Ich
+      höre zu, stelle die richtigen Fragen und übersetze zwischen Fachbereichen, Technik und
+      Menschen.
+    </p>
+    <p>
+      Digitalisierung ist für mich kein Selbstzweck: Ich automatisiere, was sich wiederholt, und
+      schaffe so Freiraum für das, was wirklich zählt — gute Entscheidungen und echte
+      Zusammenarbeit.
+    </p>
+    <p>
+      Mein Anspruch sind Lösungen, die nicht nur auf dem Papier überzeugen, sondern im Alltag
+      tragen.
+    </p>
+  </div>
+
+  <ul class="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+    {
+      values.map((v) => (
+        <li class="bg-surface p-5">
+          <h3 class="font-display text-base font-medium text-ink">{v.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-muted">{v.text}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Modal>
