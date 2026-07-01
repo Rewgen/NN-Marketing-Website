@@ -7,19 +7,31 @@ export interface Skill {
 /* Kompakte Kompetenz-Spalten im Stil des Mockups: Titel + kurze Stichworte. */
 export const skills: Skill[] = [
   {
-    icon: "layout-grid",
-    title: "Projektmanagement",
-    points: ["Anforderungsmanagement & Priorisierung", "Planung & Steuerung", "Ressourcenmanagement"],
-  },
-  {
-    icon: "cpu",
-    title: "Digitalisierung",
-    points: ["Prozessoptimierung", "Digitale Bildungsservices", "Tools & Systeme"],
-  },
-  {
     icon: "messages",
-    title: "Kommunikation",
-    points: ["Stakeholder-Kommunikation", "Donor Engagement", "B2B Vertrieb"],
+    title: "Brücke zwischen Mensch & Technik",
+    points: [
+      "Vermittlung zwischen unterschiedlichen Anliegen und Perspektiven",
+      "Übersetzung von Bedarfen in klare, umsetzbare Schritte",
+      "Stakeholder-Kommunikation auf allen Ebenen",
+    ],
+  },
+  {
+    icon: "layout-grid",
+    title: "Lösungsorientierung mit Nutzerblick",
+    points: [
+      "Datenbasiertes Arbeiten mit Blick auf den Nutzen",
+      "Auswertung von Kennzahlen zur Ableitung konkreter Maßnahmen",
+      "Anforderungsmanagement & Priorisierung",
+    ],
+  },
+  {
+    icon: "sparkles",
+    title: "Digitale Eigeninitiative",
+    points: [
+      "Selbst erlernte Web-Entwicklung & Automatisierung",
+      "KI-Tools und -Workflows in der praktischen Anwendung",
+      "Grundkenntnisse in Versionsverwaltung (Git/GitHub)",
+    ],
   },
   {
     icon: "layers",
@@ -27,8 +39,8 @@ export const skills: Skill[] = [
     points: ["Struktur & Prozesse", "Priorisierung", "Teamkoordination"],
   },
   {
-    icon: "sparkles",
-    title: "KI & Automatisierung",
-    points: ["KI-Tools (fortgeschritten)", "Datenbasierte Analysen", "Automatisierte Workflows"],
+    icon: "cpu",
+    title: "Prozessoptimierung",
+    points: ["Analyse bestehender Abläufe", "Digitalisierung von Prozessen", "Kontinuierliche Verbesserung"],
   },
 ];
