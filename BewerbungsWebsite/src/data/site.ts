@@ -8,6 +8,8 @@ export interface SiteConfig {
   nav: NavItem[];
   contact: {
     email: string;
+    phone: string;
+    location: string;
     linkedin: string;
     cvHref: string;
   };
@@ -21,11 +23,14 @@ export const site: SiteConfig = {
     { label: "Kompetenzen", href: "#skills" },
     { label: "Arbeitsweise", href: "#workstyle" },
     { label: "Lebenslauf", href: "#resume" },
+    { label: "Engagement", href: "#engagement" },
     { label: "Kontakt", href: "#contact" },
   ],
   contact: {
     email: "nils_negwer@outlook.de",
-    linkedin: "https://nilsnegwer-fuer-lsb.de/",
+    phone: "0176 45 72 0449",
+    location: "Duisburg",
+    linkedin: "https://www.linkedin.com/",
     cvHref: "/downloads/lebenslauf.pdf",
   },
 };

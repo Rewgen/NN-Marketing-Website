@@ -5,6 +5,7 @@ import Skills from "./sections/Skills.astro";
 import WorkStyle from "./sections/WorkStyle.astro";
 import Projects from "./sections/Projects.astro";
 import ResumePreview from "./sections/ResumePreview.astro";
+import Engagement from "./sections/Engagement.astro";
 import Contact from "./sections/Contact.astro";
 
 import type { Skill } from "../data/skills";
@@ -29,4 +30,5 @@ const { skills, projects } = Astro.props;
 <WorkStyle />
 <Projects items={projects} />
 <ResumePreview />
+<Engagement />
 <Contact />
