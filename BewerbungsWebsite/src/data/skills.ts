@@ -9,26 +9,26 @@ export const skills: Skill[] = [
   {
     icon: "layout-grid",
     title: "Projektmanagement",
-    points: ["Planung & Steuerung", "Ressourcenmanagement", "Agile Methoden"],
+    points: ["Anforderungsmanagement & Priorisierung", "Planung & Steuerung", "Ressourcenmanagement"],
   },
   {
     icon: "cpu",
     title: "Digitalisierung",
-    points: ["Prozessoptimierung", "Tools & Systeme", "Automatisierung"],
+    points: ["Prozessoptimierung", "Digitale Bildungsservices", "Tools & Systeme"],
   },
   {
     icon: "messages",
     title: "Kommunikation",
-    points: ["Moderation", "Stakeholder-Management", "Präsentation"],
+    points: ["Stakeholder-Kommunikation", "Donor Engagement", "B2B Vertrieb"],
   },
   {
     icon: "layers",
     title: "Organisation",
-    points: ["Struktur & Prozesse", "Priorisierung", "Effizienz"],
+    points: ["Struktur & Prozesse", "Priorisierung", "Teamkoordination"],
   },
   {
     icon: "sparkles",
     title: "KI & Automatisierung",
-    points: ["Workflows", "KI-Anwendungen", "Datenanalyse"],
+    points: ["KI-Tools (fortgeschritten)", "Datenbasierte Analysen", "Automatisierte Workflows"],
   },
 ];

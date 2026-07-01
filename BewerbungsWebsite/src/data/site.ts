@@ -24,8 +24,8 @@ export const site: SiteConfig = {
     { label: "Kontakt", href: "#contact" },
   ],
   contact: {
-    email: "hallo@nilsnegwer.de",
-    linkedin: "https://www.linkedin.com/",
+    email: "nils_negwer@outlook.de",
+    linkedin: "https://nilsnegwer-fuer-lsb.de/",
     cvHref: "/downloads/lebenslauf.pdf",
   },
 };
