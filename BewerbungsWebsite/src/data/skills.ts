@@ -1,46 +1,33 @@
 export interface Skill {
   icon: string;
   title: string;
-  points: string[];
+  text: string;
 }
 
-/* Kompakte Kompetenz-Spalten im Stil des Mockups: Titel + kurze Stichworte. */
+/* Kompetenz-Kacheln im Block "Wie ich arbeite": Titel + kurzer Beschreibungstext. */
 export const skills: Skill[] = [
   {
     icon: "messages",
-    title: "Brücke zwischen Mensch & Technik",
-    points: [
-      "Vermittlung zwischen unterschiedlichen Anliegen und Perspektiven",
-      "Übersetzung von Bedarfen in klare, umsetzbare Schritte",
-      "Stakeholder-Kommunikation auf allen Ebenen",
-    ],
-  },
-  {
-    icon: "layout-grid",
-    title: "Lösungsorientierung mit Nutzerblick",
-    points: [
-      "Datenbasiertes Arbeiten mit Blick auf den Nutzen",
-      "Auswertung von Kennzahlen zur Ableitung konkreter Maßnahmen",
-      "Anforderungsmanagement & Priorisierung",
-    ],
-  },
-  {
-    icon: "sparkles",
-    title: "Digitale Eigeninitiative",
-    points: [
-      "Selbst erlernte Web-Entwicklung & Automatisierung",
-      "KI-Tools und -Workflows in der praktischen Anwendung",
-      "Grundkenntnisse in Versionsverwaltung (Git/GitHub)",
-    ],
+    title: "Zuhören und übersetzen",
+    text: "Was Menschen wirklich brauchen herausfinden, auch wenn sie es nicht direkt so sagen, und in klare, umsetzbare Schritte bringen.",
   },
   {
     icon: "layers",
-    title: "Organisation",
-    points: ["Struktur & Prozesse", "Priorisierung", "Teamkoordination"],
+    title: "Strukturieren und organisieren",
+    text: "Aus vielen losen Enden ein Vorhaben machen, das Hand und Fuß hat, mit Prioritäten, Zeitplan und dem Blick fürs Ganze.",
   },
   {
     icon: "cpu",
-    title: "Prozessoptimierung",
-    points: ["Analyse bestehender Abläufe", "Digitalisierung von Prozessen", "Kontinuierliche Verbesserung"],
+    title: "Digital denken und umsetzen",
+    text: "Prozesse nicht nur verwalten, sondern selbst digitalisieren, automatisieren und dabei am Ball bleiben, was neue Tools ermöglichen.",
+  },
+  {
+    icon: "sparkles",
+    title: "Mehr tun, als gefordert ist",
+    text: "Bedarf erkennen, bevor er angesprochen wird, und von selbst handeln, ob beim Aufbau neuer Fähigkeiten, in der Organisation oder im Umgang mit Menschen, die einen betreffen.",
   },
 ];
+
+/* Zusammenfassender Fließtext unterhalb der Kacheln. */
+export const workProcess =
+  "Am Anfang steht immer Zuhören, erst dann weiß ich, worum es wirklich geht. Danach strukturiere ich, was zu tun ist, und setze es Schritt für Schritt um. Und weil kein Plan von Anfang an perfekt ist, justiere ich unterwegs nach, wenn sich zeigt, was besser funktioniert.";

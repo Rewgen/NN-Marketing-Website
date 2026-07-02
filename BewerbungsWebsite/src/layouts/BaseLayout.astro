@@ -100,6 +100,27 @@ const {
         );
       }
 
+      // In-Page-Navigation ohne Hash in der URL: sanft scrollen statt Anker-Sprung,
+      // damit die Adresszeile immer gleich bleibt.
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = (a.getAttribute("href") ?? "").slice(1);
+          const target = id ? document.getElementById(id) : null;
+          if (!target) return;
+          e.preventDefault();
+          if (id === "top") {
+            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+          } else {
+            target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+          }
+          // Skip-Link: Fokus für Tastatur-Nutzung weiterhin korrekt setzen
+          if (a.classList.contains("skip-link")) {
+            (target as HTMLElement).tabIndex = -1;
+            (target as HTMLElement).focus({ preventScroll: true });
+          }
+        });
+      });
+
       document.querySelectorAll("[data-modal-open]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const dlg = document.getElementById(btn.getAttribute("data-modal-open"));

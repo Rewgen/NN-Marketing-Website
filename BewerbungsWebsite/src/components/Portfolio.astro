@@ -2,7 +2,6 @@
 import Hero from "./sections/Hero.astro";
 import About from "./sections/About.astro";
 import Skills from "./sections/Skills.astro";
-import WorkStyle from "./sections/WorkStyle.astro";
 import Projects from "./sections/Projects.astro";
 import ResumePreview from "./sections/ResumePreview.astro";
 import Engagement from "./sections/Engagement.astro";
@@ -12,9 +11,9 @@ import type { Skill } from "../data/skills";
 import type { Project } from "../data/projects";
 
 /*
-  Die wiederverwendbare "Wirbelsäule" der Website. Bewerbungsseiten (z. B. /lsb)
-  rendern davor ihre eigenen Sektionen und können hier per Prop Inhalte ergänzen,
-  ohne das Grundgerüst zu duplizieren.
+  Die wiederverwendbare "Wirbelsäule" der Website. Stellenspezifische Seiten
+  (z. B. /firma-xy) rendern davor ihre eigenen Sektionen und können hier per
+  Prop Inhalte ergänzen, ohne das Grundgerüst zu duplizieren.
 */
 interface Props {
   skills?: Skill[];
@@ -27,7 +26,6 @@ const { skills, projects } = Astro.props;
 <Hero />
 <About />
 <Skills items={skills} />
-<WorkStyle />
 <Projects items={projects} />
 <ResumePreview />
 <Engagement />

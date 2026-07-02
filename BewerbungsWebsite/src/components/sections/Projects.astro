@@ -19,7 +19,7 @@ const withImage = items.map((p) => ({
 }));
 ---
 
-<Section id="projekte" surface labelledby="projekte-title">
+<Section id="projekte" labelledby="projekte-title">
   <div class="max-w-2xl" data-reveal>
     <Eyebrow>Projekte</Eyebrow>
     <h2
@@ -28,23 +28,49 @@ const withImage = items.map((p) => ({
     >
       Ausgewählte Projekte.
     </h2>
-    <p class="mt-4 text-sm text-muted">Details folgen in Kürze.</p>
   </div>
 
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {
       withImage.map((p, i) => (
-        <Card href={p.href} padded={false} class="overflow-hidden" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+        <Card padded={false} class="overflow-hidden" data-reveal style={`--reveal-delay:${i * 60}ms`}>
           <div class="flex aspect-[16/10] items-center justify-center bg-[#eceae5] text-[#b9b6ae]">
             {p.hasImage ? (
-              <img src={p.image} alt={p.title} class="h-full w-full object-cover" />
+              <img src={p.image} alt={p.title} class="h-full w-full object-cover" loading="lazy" />
             ) : (
               <Icon name="image" class="h-8 w-8" />
             )}
           </div>
           <div class="p-6">
-            <h3 class="text-base font-medium text-ink">{p.title}</h3>
-            <p class="mt-1.5 text-sm text-muted">In Kürze mehr</p>
+            <h3 class="font-display text-lg font-medium leading-snug text-ink">{p.title}</h3>
+            <dl class="mt-5 space-y-4">
+              <div>
+                <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+                  Ausgangslage
+                </dt>
+                <dd class="mt-1 text-sm leading-relaxed text-muted">{p.ausgangslage}</dd>
+              </div>
+              <div>
+                <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+                  Was ich gemacht habe
+                </dt>
+                <dd class="mt-1 text-sm leading-relaxed text-muted">{p.umsetzung}</dd>
+              </div>
+              <div>
+                <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+                  Ergebnis
+                </dt>
+                <dd class="mt-1 text-sm leading-relaxed text-muted">{p.ergebnis}</dd>
+              </div>
+              {p.nebenerfolg && (
+                <div>
+                  <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+                    Nebenerfolg
+                  </dt>
+                  <dd class="mt-1 text-sm leading-relaxed text-muted">{p.nebenerfolg}</dd>
+                </div>
+              )}
+            </dl>
           </div>
         </Card>
       ))
