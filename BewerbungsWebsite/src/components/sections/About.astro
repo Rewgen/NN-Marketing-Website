@@ -3,26 +3,31 @@ import Section from "../ui/Section.astro";
 import Eyebrow from "../ui/Eyebrow.astro";
 import Button from "../ui/Button.astro";
 import Modal from "../ui/Modal.astro";
+import Icon from "../ui/Icon.astro";
 
-const traits = [
+const values = [
   {
-    title: "Organisiert",
-    text: "Ich strukturiere komplexe Vorhaben, behalte Deadlines im Blick und sorge für klare Abläufe.",
+    icon: "target",
+    title: "Disziplin",
+    text: "... ist für mich der wichtigste Wert, weil sie die Kraft gibt, nach einem Rückschlag wieder aufzustehen und weiter seinen Beitrag zu leisten.",
   },
   {
-    title: "Kommunikativ",
-    text: "Ich verbinde Menschen, fördere den Austausch und schaffe Verständnis auf allen Ebenen.",
+    icon: "shield",
+    title: "Loyalität",
+    text: "... bedeutet für mich, wirklich hinter einer Sache zu stehen, egal ob Mensch, Unternehmen, persönliche Werte oder Versprechen.",
   },
   {
-    title: "Lösungsorientiert",
-    text: "Ich denke mit, hinterfrage und entwickle Lösungen, die wirklich weiterbringen.",
+    icon: "heart",
+    title: "Menschlichkeit",
+    text: "... steht für mich dafür, den Menschen zu sehen, unabhängig von Herkunft oder Umständen, und ein ehrliches Interesse daran zu haben, dass es anderen gut geht.",
   },
 ];
 
-const values = [
-  { title: "Disziplin", text: "Konsequent bleiben, auch wenn es unbequem wird." },
-  { title: "Loyalität", text: "Verlässlich sein — für Menschen und für Zusagen." },
-  { title: "Menschlichkeit", text: "Menschen sehen, zuhören und mitnehmen." },
+const story = [
+  "Wie viele stand ich anfangs vor der Herausforderung, mich für einen Weg zu entscheiden. Ich wusste nur, dass es mit Menschen zu tun haben sollte. Also habe ich im Einzelhandel angefangen. Dort habe ich gemerkt, dass ich ein besonderes Talent habe, mit Menschen zu interagieren, ihnen zuzuhören und zu verstehen, was sie brauchen.",
+  "Danach kamen Stationen, die sich teilweise stark unterscheiden, manche geplant, manche eher zufällig entstanden. Vertrieb, Personalverantwortung, der Aufbau einer eigenen Selbstständigkeit. Jede davon hat mir etwas anderes beigebracht und mich für die kommenden Herausforderungen geformt.",
+  "Am Ende war es aber eine Erkenntnis, die geblieben ist: Am meisten erfüllt es mich, Projekte zu organisieren, die Menschen wirklich weiterbringen. Mir reicht es nicht, nur ein Unternehmen erfolgreicher zu machen, ich will einen Beitrag leisten, der spürbar ist. Deshalb habe ich auch aus eigenem Antrieb ehrenamtliche Projekte gestartet und mich sozial eingebracht.",
+  "Auf meinem Weg habe ich gelernt, dass Rückschläge kein Grund sind, aufzuhören, sondern der Anlass, sich neu aufzustellen. Diese Disziplin, mich nach jedem Rückschlag wieder aufzurichten und gestärkt weiterzumachen, gibt mir die Zuversicht, dass ich auch komplexe Projekte zuverlässig zum Ziel bringe.",
 ];
 ---
 
@@ -38,12 +43,9 @@ const values = [
       </h2>
       <div class="mt-5 max-w-md space-y-4 text-base leading-relaxed text-muted">
         <p>
-          Ich arbeite an der Schnittstelle von Menschen, Prozessen und Technologie. Struktur,
-          Kommunikation und Umsetzung sind für mich der Schlüssel zu Projekten, die wirken.
-        </p>
-        <p>
-          Mein Antrieb ist es, Komplexes greifbar zu machen — und aus vielen Einzelteilen ein
-          klares, funktionierendes Ganzes zu formen.
+          Mein Weg war nicht geradlinig, aber ein roter Faden zieht sich durch: Projekte
+          verwirklichen, Menschen weiterbringen. Das treibt mich an, seit ich weiß, wo ich hin
+          will.
         </p>
       </div>
       <Button type="button" variant="ghost" icon="arrow-right" class="mt-6" data-modal-open="about-modal">
@@ -53,10 +55,15 @@ const values = [
 
     <ul class="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-line">
       {
-        traits.map((t) => (
+        values.map((v) => (
           <li class="bg-surface p-6" data-reveal>
-            <h3 class="font-display text-lg font-medium text-ink">{t.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{t.text}</p>
+            <div class="flex items-start gap-4">
+              <Icon name={v.icon} class="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <div>
+                <h3 class="font-display text-lg font-medium text-ink">{v.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{v.text}</p>
+              </div>
+            </div>
           </li>
         ))
       }
@@ -70,34 +77,6 @@ const values = [
     Mehr über mich.
   </h2>
   <div class="mt-6 space-y-4 text-base leading-relaxed text-muted">
-    <p>
-      Ich bin gern dort, wo Menschen, Prozesse und Technologie zusammenkommen — und sorge dafür,
-      dass aus vielen Einzelteilen ein klares, funktionierendes Ganzes wird.
-    </p>
-    <p>
-      Komplexe Vorhaben strukturiere ich so, dass alle Beteiligten wissen, worauf es ankommt. Ich
-      höre zu, stelle die richtigen Fragen und übersetze zwischen Fachbereichen, Technik und
-      Menschen.
-    </p>
-    <p>
-      Digitalisierung ist für mich kein Selbstzweck: Ich automatisiere, was sich wiederholt, und
-      schaffe so Freiraum für das, was wirklich zählt — gute Entscheidungen und echte
-      Zusammenarbeit.
-    </p>
-    <p>
-      Mein Anspruch sind Lösungen, die nicht nur auf dem Papier überzeugen, sondern im Alltag
-      tragen.
-    </p>
+    {story.map((p) => <p>{p}</p>)}
   </div>
-
-  <ul class="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
-    {
-      values.map((v) => (
-        <li class="bg-surface p-5">
-          <h3 class="font-display text-base font-medium text-ink">{v.title}</h3>
-          <p class="mt-1.5 text-sm leading-relaxed text-muted">{v.text}</p>
-        </li>
-      ))
-    }
-  </ul>
 </Modal>

@@ -1,6 +1,9 @@
 ---
 import Icon from "./ui/Icon.astro";
 import { site } from "../data/site";
+import { getMyselfImages } from "../lib/images";
+
+const avatar = getMyselfImages()[0];
 ---
 
 <header id="site-nav" class="sticky top-0 z-50 transition-all duration-300">
@@ -11,7 +14,7 @@ import { site } from "../data/site";
         class="nav-avatar grid place-items-center overflow-hidden rounded-full bg-accent-tint"
         aria-hidden="true"
       >
-        <img src="/imagesMyself/me.png" alt="" width="32" height="32" class="h-full w-full object-cover" />
+        <img src={avatar.src} alt="" width="32" height="32" class="h-full w-full object-cover" />
       </span>
       <span class="text-sm font-medium uppercase tracking-[0.08em] text-ink">{site.name}</span>
     </a>

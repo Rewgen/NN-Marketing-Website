@@ -3,8 +3,8 @@
 /*
   Design-Tokens werden über die @theme-Schicht an Tailwind übergeben, zeigen
   aber auf "rohe" CSS-Variablen (--c-*, --f-*). Dadurch lässt sich das gesamte
-  Grundgerüst pro Bewerbungsseite umfärben: einfach data-theme="lsb" am <html>
-  setzen und unten einen [data-theme="lsb"]-Block mit eigenen Werten ergänzen.
+  Grundgerüst pro Unterseite umfärben: einfach data-theme="firma-xy" am <html>
+  setzen und unten einen [data-theme="firma-xy"]-Block mit eigenen Werten ergänzen.
 */
 @theme {
   --color-canvas: var(--c-canvas);
@@ -79,6 +79,11 @@
 }
 .skip-link:focus {
   left: 0;
+}
+
+/* Ziel des Skip-Links erhält programmatischen Fokus — kein sichtbarer Ring nötig */
+main:focus {
+  outline: none;
 }
 
 /*

@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "dist"
 
-[[edge_functions]]
-  function = "auth"
-  path = "/*"
+# Der frühere Ganzseiten-Passwortschutz (Edge Function "auth") ist deaktiviert:
+# Der obere Teil der Seite ist öffentlich, der Rest wird clientseitig über das
+# Passwort-Gate freigeschaltet. Zum Reaktivieren den Block wieder einkommentieren
+# und SITE_PASSWORD als Umgebungsvariable setzen.
+# [[edge_functions]]
+#   function = "auth"
+#   path = "/*"

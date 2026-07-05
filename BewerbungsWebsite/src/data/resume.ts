@@ -2,7 +2,7 @@ export interface ResumeEntry {
   period: string;
   role: string;
   org?: string;
-  description: string;
+  description?: string;
   achievements?: string[];
   category: "work" | "training" | "education";
 }
@@ -15,10 +15,10 @@ export const resume: ResumeEntry[] = [
     role: "Spendergewinnung / Donor Engagement",
     org: "Westdeutsche Spenderzentrale (WSZE) – Ratingen",
     description:
-      "Eigenverantwortliche Planung, Organisation und Steuerung von Gewinnungsaktionen über alle Projektphasen hinweg.",
+      "Eigenverantwortliche Planung, Organisation und Steuerung von Typisierungsaktionen über alle Projektphasen hinweg.",
     achievements: [
-      "Eigenverantwortliche Planung, Organisation und Steuerung von Aktionen über alle Projektphasen",
-      "Termindurchführung mit direkter Zielgruppenansprache zur Neugewinnung",
+      "Eigenverantwortliche Planung, Organisation und Steuerung von Typisierungsaktionen über alle Projektphasen",
+      "Termindurchführung mit direkter Zielgruppenansprache zur Gewinnung von Stammzellspender*innen",
       "Akquise von Veranstaltungspartnern (Unternehmen, Festivals, Bildungseinrichtungen)",
       "2024 höchste Neuspender-Quote seit Gründung",
     ],
@@ -58,7 +58,7 @@ export const resume: ResumeEntry[] = [
     description:
       "Führungsverantwortung im Tagesgeschäft sowie eigenverantwortliche Leitung eines kompletten Abteilungsumbaus.",
     achievements: [
-      "Führung des Teams im Tagesgeschäft sowie Ansprechperson für Mitarbeiter*innen-Anliegen und Kundenanliegen",
+      "Führung des Teams im Tagesgeschäft sowie Ansprechperson für Mitarbeiter*innen- und Kundenanliegen",
       "Analyse von Verkaufskennzahlen und Optimierung der Warenplatzierung auf Datenbasis",
       "Eigenverantwortliche Leitung eines kompletten Abteilungsumbaus (Flächenkonzept, Warenplatzierung, Teamkoordination)",
     ],
@@ -74,25 +74,31 @@ export const resume: ResumeEntry[] = [
       "Beförderung zum stellvertretenden Abteilungsleiter",
     ],
   },
-  // Bildung & Weiterbildung
+  {
+    category: "work",
+    period: "06/2016 — 11/2016",
+    role: "Fachverkäufer Kosmetik & Körperpflege",
+    org: "Stadt-Parfümerie Pieper GmbH – Oberhausen",
+  },
+  // Weiterbildung
   {
     category: "training",
     period: "2024 — heute",
     role: "Selbststudium – Entwicklung & KI-Tools",
-    description:
-      "Vollständig selbstorganisiertes Lernen (ca. 500 Std.) neben Vollzeitjob und Ehrenamt.",
+    org: "Vollständig selbstorganisiertes Lernen (ca. 500 Std.) neben Vollzeitjob, Familie und Ehrenamt",
     achievements: [
-      "Eigenständiger Aufbau einer Automatisierung: Integration zur automatisierten Erfassung und Planung von Aufgaben",
+      "Eigenständiger Aufbau einer Automatisierung: Erfassung und Planung von Aufgaben über Telegram",
       "Praktische Softwareentwickler-Grundlagen (HTML, CSS, JavaScript/TypeScript, React) inkl. eigener Projekte",
+      "Eigene App zur Trainingsplan-Gestaltung mit Claude Code entwickelt",
       "Grundkenntnisse in Versionsverwaltung (Git/GitHub)",
     ],
   },
+  // Ausbildung
   {
     category: "education",
     period: "08/2013 — 06/2016",
     role: "Ausbildung zum Einzelhandelskaufmann",
     org: "Stadt-Parfümerie Pieper GmbH – Oberhausen",
-    description: "Abgeschlossene Berufsausbildung.",
     achievements: ["Gesamtergebnis IHK-Prüfung: 84 / 100"],
   },
   {
@@ -100,7 +106,6 @@ export const resume: ResumeEntry[] = [
     period: "08/2006 — 06/2013",
     role: "Mittlere Fachoberschulreife",
     org: "Realschule Duisburg Süd",
-    description: "Schulischer Abschluss.",
   },
 ];
 

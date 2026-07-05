@@ -1,62 +1,58 @@
 ---
 import Section from "../ui/Section.astro";
 import Eyebrow from "../ui/Eyebrow.astro";
-import { volunteering, interests } from "../../data/engagement";
+import Icon from "../ui/Icon.astro";
+import { volunteering, interests, personal } from "../../data/engagement";
 ---
 
 <Section id="engagement" labelledby="engagement-title">
   <div class="max-w-2xl" data-reveal>
-    <Eyebrow>Engagement</Eyebrow>
+    <Eyebrow>Neben dem Job</Eyebrow>
     <h2
       id="engagement-title"
       class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-ink sm:text-4xl"
     >
-      Ehrenamt, Sport & Interessen.
+      Ehrenamt, Interessen und Persönliches.
     </h2>
-    <p class="mt-4 text-base leading-relaxed text-muted">
-      Was mich neben dem Job antreibt und wie ich mich in meinem Umfeld einbringe.
-    </p>
   </div>
 
-  <div class="mt-10 grid gap-8 sm:grid-cols-2">
-    <div data-reveal>
-      <p class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
-        Ehrenamt & Nebentätigkeiten
-      </p>
-      <ul class="mt-4 flex flex-col gap-4">
-        {
-          volunteering.map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="text-xl leading-none" aria-hidden="true">
-                {item.icon}
-              </span>
-              <div>
-                <h3 class="text-sm font-medium text-ink">{item.title}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+  <div class="mt-10" data-reveal>
+    <p class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+      Ehrenamt & Nebentätigkeiten
+    </p>
+    <ul class="mt-4 grid gap-x-10 gap-y-5 sm:grid-cols-2">
+      {
+        volunteering.map((item) => (
+          <li class="flex items-start gap-3">
+            <Icon name={item.icon} class="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+            <div>
+              <h3 class="text-sm font-medium text-ink">{item.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
-    <div data-reveal style="--reveal-delay:80ms">
-      <p class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">Interessen</p>
-      <ul class="mt-4 flex flex-col gap-4">
-        {
-          interests.map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="text-xl leading-none" aria-hidden="true">
-                {item.icon}
-              </span>
-              <div>
-                <h3 class="text-sm font-medium text-ink">{item.title}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+  <div class="mt-12" data-reveal style="--reveal-delay:80ms">
+    <p class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">Interessen</p>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        interests.map((i) => (
+          <li class="rounded-full bg-accent-tint px-3.5 py-1.5 text-sm font-medium text-accent-deep">
+            {i}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="mt-12" data-reveal style="--reveal-delay:120ms">
+    <p class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">Persönlich</p>
+    <p class="mt-4 flex items-center gap-3 text-base leading-relaxed text-muted">
+      <Icon name="heart" class="h-5 w-5 shrink-0 text-accent" />
+      {personal}
+    </p>
   </div>
 </Section>

@@ -20,10 +20,10 @@ export const site: SiteConfig = {
   name: "Nils Negwer",
   nav: [
     { label: "Über mich", href: "#about" },
-    { label: "Kompetenzen", href: "#skills" },
-    { label: "Arbeitsweise", href: "#workstyle" },
+    { label: "Wie ich arbeite", href: "#skills" },
+    { label: "Projekte", href: "#projekte" },
     { label: "Lebenslauf", href: "#resume" },
-    { label: "Engagement", href: "#engagement" },
+    { label: "Neben dem Job", href: "#engagement" },
     { label: "Kontakt", href: "#contact" },
   ],
   contact: {

@@ -4,6 +4,8 @@ import { join } from "node:path";
 import Section from "../ui/Section.astro";
 import Eyebrow from "../ui/Eyebrow.astro";
 import Card from "../ui/Card.astro";
+import Button from "../ui/Button.astro";
+import Modal from "../ui/Modal.astro";
 import Icon from "../ui/Icon.astro";
 import { projects as defaultProjects, type Project } from "../../data/projects";
 
@@ -13,13 +15,14 @@ interface Props {
 
 const { items = defaultProjects } = Astro.props;
 
-const withImage = items.map((p) => ({
+const withImage = items.map((p, i) => ({
   ...p,
+  modalId: `projekt-modal-${i}`,
   hasImage: existsSync(join(process.cwd(), "public", p.image)),
 }));
 ---
 
-<Section id="projekte" surface labelledby="projekte-title">
+<Section id="projekte" labelledby="projekte-title">
   <div class="max-w-2xl" data-reveal>
     <Eyebrow>Projekte</Eyebrow>
     <h2
@@ -28,26 +31,86 @@ const withImage = items.map((p) => ({
     >
       Ausgewählte Projekte.
     </h2>
-    <p class="mt-4 text-sm text-muted">Details folgen in Kürze.</p>
   </div>
 
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {
       withImage.map((p, i) => (
-        <Card href={p.href} padded={false} class="overflow-hidden" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+        <Card
+          padded={false}
+          class="flex flex-col overflow-hidden"
+          data-reveal
+          style={`--reveal-delay:${i * 60}ms`}
+        >
           <div class="flex aspect-[16/10] items-center justify-center bg-[#eceae5] text-[#b9b6ae]">
             {p.hasImage ? (
-              <img src={p.image} alt={p.title} class="h-full w-full object-cover" />
+              <img src={p.image} alt={p.title} class="h-full w-full object-cover" loading="lazy" />
             ) : (
               <Icon name="image" class="h-8 w-8" />
             )}
           </div>
-          <div class="p-6">
-            <h3 class="text-base font-medium text-ink">{p.title}</h3>
-            <p class="mt-1.5 text-sm text-muted">In Kürze mehr</p>
+          <div class="flex flex-1 flex-col p-6">
+            <h3 class="font-display text-lg font-medium leading-snug text-ink">{p.title}</h3>
+            <p class="mt-3 text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+              Ausgangslage
+            </p>
+            <p class="mt-1 text-sm leading-relaxed text-muted">{p.ausgangslage}</p>
+            <div class="mt-auto pt-5">
+              <Button type="button" variant="ghost" icon="arrow-right" data-modal-open={p.modalId}>
+                Mehr erfahren
+              </Button>
+            </div>
           </div>
         </Card>
       ))
     }
   </div>
 </Section>
+
+{
+  withImage.map((p) => (
+    <Modal id={p.modalId} size="md" labelledby={`${p.modalId}-title`}>
+      <Eyebrow>Projekt</Eyebrow>
+      <h2
+        id={`${p.modalId}-title`}
+        class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-ink"
+      >
+        {p.title}
+      </h2>
+      {p.hasImage && (
+        <img
+          src={p.image}
+          alt={p.title}
+          class="mt-6 aspect-[16/9] w-full rounded-xl border border-line object-cover"
+          loading="lazy"
+        />
+      )}
+      <dl class="mt-6 space-y-5">
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+            Ausgangslage
+          </dt>
+          <dd class="mt-1.5 text-base leading-relaxed text-muted">{p.ausgangslage}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+            Was ich gemacht habe
+          </dt>
+          <dd class="mt-1.5 text-base leading-relaxed text-muted">{p.umsetzung}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">Ergebnis</dt>
+          <dd class="mt-1.5 text-base leading-relaxed text-muted">{p.ergebnis}</dd>
+        </div>
+        {p.nebenerfolg && (
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-[0.14em] text-accent-deep">
+              Nebenerfolg
+            </dt>
+            <dd class="mt-1.5 text-base leading-relaxed text-muted">{p.nebenerfolg}</dd>
+          </div>
+        )}
+      </dl>
+    </Modal>
+  ))
+}

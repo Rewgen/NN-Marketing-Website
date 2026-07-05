@@ -32,7 +32,7 @@ function loginPage(error = false): Response {
     h1 {
       font-size: 1.25rem;
       font-weight: 700;
-      color: #003a70;
+      color: #2f545a;
       text-align: center;
     }
     p.sub {
@@ -49,11 +49,11 @@ function loginPage(error = false): Response {
       outline: none;
       transition: border-color 0.15s;
     }
-    input[type="password"]:focus { border-color: #009E80; }
+    input[type="password"]:focus { border-color: #3e6b73; }
     button {
       width: 100%;
       padding: 12px;
-      background: #009E80;
+      background: #3e6b73;
       color: #fff;
       font-size: 0.9375rem;
       font-weight: 600;
@@ -62,7 +62,7 @@ function loginPage(error = false): Response {
       cursor: pointer;
       transition: background 0.15s;
     }
-    button:hover { background: #007d66; }
+    button:hover { background: #2f545a; }
     .error {
       font-size: 0.875rem;
       color: #dc2626;
@@ -76,7 +76,7 @@ function loginPage(error = false): Response {
 </head>
 <body>
   <div class="card">
-    <h1>Bewerbung Nils Negwer</h1>
+    <h1>Nils Negwer</h1>
     <p class="sub">Bitte geben Sie das Passwort ein, um die Seite zu öffnen.</p>
     ${error ? `<p class="error">Passwort nicht korrekt – bitte erneut versuchen.</p>` : ""}
     <form method="POST">

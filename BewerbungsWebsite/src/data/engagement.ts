@@ -4,44 +4,39 @@ export interface EngagementItem {
   text: string;
 }
 
+/*
+  Bereich "Neben dem Job": Ehrenamt, Nebentätigkeiten, Interessen und
+  Persönliches. Leichtathletik-Training und Handykurse erscheinen hier bewusst
+  nur als kurze Faktenzeile — die Geschichten dazu stehen im Bereich "Projekte".
+*/
 export const volunteering: EngagementItem[] = [
   {
-    icon: "🏃",
-    title: "Sport-Training",
-    text: "Ehrenamtliches Training von Jugendgruppen im Verein, mit Übungsleiter-Lizenz.",
+    icon: "medal",
+    title: "Leichtathletik-Trainer & Prüfer für das Deutsche Sportabzeichen",
+    text: "Übungsleiter-C-Lizenz, zwei Jugendgruppen beim ETuS Wedau.",
   },
   {
-    icon: "📱",
-    title: "Digitalkurse für Senioren",
-    text: "Ehrenamtliche, selbst organisierte Kurse, die älteren Menschen den Umgang mit digitalen Geräten näherbringen.",
+    icon: "smartphone",
+    title: "Handykurse für Senioren",
+    text: "Ehrenamtlich organisierte Smartphone-Kurse.",
   },
   {
-    icon: "🌙",
-    title: "Nebentätigkeit auf Minijob-Basis",
-    text: "Zuverlässige Übernahme von Verantwortung auch außerhalb der Haupttätigkeit.",
+    icon: "target",
+    title: "Schützenverein",
+    text: "Aktives Mitglied im Schützenverein vor Ort.",
+  },
+  {
+    icon: "moon",
+    title: "Nachtwache im Fitnessstudio",
+    text: "Nebentätigkeit auf Minijob-Basis.",
   },
 ];
 
-export const interests: EngagementItem[] = [
-  {
-    icon: "🏋️",
-    title: "Calisthenics",
-    text: "Krafttraining mit dem eigenen Körpergewicht.",
-  },
-  {
-    icon: "🏃",
-    title: "Ausdauersport",
-    text: "Laufen, der Arbeitsweg mit dem Rad und ein Marathon als bisheriges Highlight.",
-  },
-  {
-    icon: "🤖",
-    title: "Technologie & KI",
-    text: "Aus eigenem Interesse regelmäßige Beschäftigung mit Automatisierung, KI-Agenten und neuen Tools.",
-  },
+export const interests: string[] = [
+  "Calisthenics",
+  "Ausdauersport (Marathon in 4:11 Std.)",
+  "Bouldern",
+  "Technologie & KI",
 ];
 
-export const values: EngagementItem[] = [
-  { icon: "", title: "Disziplin", text: "Konsequent bleiben, auch wenn es unbequem wird." },
-  { icon: "", title: "Loyalität", text: "Verlässlich sein — für Menschen und für Zusagen." },
-  { icon: "", title: "Menschlichkeit", text: "Menschen sehen, zuhören und mitnehmen." },
-];
+export const personal = "Leidenschaftlicher Vater einer wunderbaren Tochter.";
