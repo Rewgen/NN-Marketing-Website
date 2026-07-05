@@ -28,7 +28,7 @@ export const volunteering: EngagementItem[] = [
   {
     icon: "moon",
     title: "Nachtwache im Fitnessstudio",
-    text: "Nebentätigkeit auf Minijob-Basis in Gladbeck.",
+    text: "Nebentätigkeit auf Minijob-Basis.",
   },
 ];
 

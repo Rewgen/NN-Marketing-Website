@@ -6,6 +6,7 @@ import Projects from "./sections/Projects.astro";
 import ResumePreview from "./sections/ResumePreview.astro";
 import Engagement from "./sections/Engagement.astro";
 import Contact from "./sections/Contact.astro";
+import PasswordGate from "./PasswordGate.astro";
 
 import type { Skill } from "../data/skills";
 import type { Project } from "../data/projects";
@@ -24,9 +25,15 @@ const { skills, projects } = Astro.props;
 ---
 
 <Hero />
-<About />
-<Skills items={skills} />
-<Projects items={projects} />
-<ResumePreview />
-<Engagement />
-<Contact />
+
+{/* Alles unterhalb des Heros ist bis zur Passworteingabe ausgeblendet */}
+<div id="gate-content" hidden>
+  <About />
+  <Skills items={skills} />
+  <Projects items={projects} />
+  <ResumePreview />
+  <Engagement />
+  <Contact />
+</div>
+
+<PasswordGate />

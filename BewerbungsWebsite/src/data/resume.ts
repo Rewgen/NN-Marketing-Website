@@ -89,6 +89,7 @@ export const resume: ResumeEntry[] = [
     achievements: [
       "Eigenständiger Aufbau einer Automatisierung: Erfassung und Planung von Aufgaben über Telegram",
       "Praktische Softwareentwickler-Grundlagen (HTML, CSS, JavaScript/TypeScript, React) inkl. eigener Projekte",
+      "Eigene App zur Trainingsplan-Gestaltung mit Claude Code entwickelt",
       "Grundkenntnisse in Versionsverwaltung (Git/GitHub)",
     ],
   },

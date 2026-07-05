@@ -8,14 +8,14 @@ export interface Project {
 }
 
 /*
-  Projekte mit Ausgangslage, Umsetzung und Ergebnis. Bilder einfach unter
-  public/projekte/ ablegen — sobald die Datei existiert, wird sie automatisch
-  statt des Platzhalters angezeigt.
+  Projekte mit Ausgangslage, Umsetzung und Ergebnis. Bilder liegen unter
+  public/imagesProjects/ — fehlt eine Datei, erscheint automatisch ein
+  Platzhalter.
 */
 export const projects: Project[] = [
   {
-    title: "Sportabzeichenfest für die Kindergruppe",
-    image: "/projekte/sportabzeichenfest.jpg",
+    title: "Sportabzeichenfest für die Leichtathletik Jugend",
+    image: "/imagesProjects/SportsBadge.jpg",
     ausgangslage:
       "Das Deutsche Sportabzeichen abzulegen ist für Kinder oft trocken, wenn es nur nebenbei im Training mitläuft.",
     umsetzung:
@@ -27,7 +27,7 @@ export const projects: Project[] = [
   },
   {
     title: "Smartphone-Kurse für Senioren",
-    image: "/projekte/smartphone-kurse.jpg",
+    image: "/imagesProjects/smartphoneSeminar.jpg",
     ausgangslage:
       "Viele ältere Menschen trauen sich nicht, ihr Smartphone wirklich zu nutzen, aus Angst, etwas falsch zu machen, oder finden niemanden, der es ihnen in Ruhe erklärt.",
     umsetzung:
@@ -36,7 +36,7 @@ export const projects: Project[] = [
   },
   {
     title: "Eigenständig Programmieren und KI beibringen",
-    image: "/projekte/programmieren-ki.jpg",
+    image: "/imagesProjects/learnToProgram.jpg",
     ausgangslage:
       "Ohne Vorkenntnisse, aber mit dem Ziel, digitale Prozesse nicht nur zu nutzen, sondern selbst zu bauen.",
     umsetzung:

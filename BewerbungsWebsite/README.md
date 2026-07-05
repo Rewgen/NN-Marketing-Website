@@ -41,6 +41,9 @@ public/
 
 ## Deployment
 
-Netlify (siehe `netlify.toml`). Eine Edge Function (`netlify/edge-functions/auth.ts`)
-schützt die Seite mit einem Passwort (Umgebungsvariable `SITE_PASSWORD`).
+Netlify (siehe `netlify.toml`). Der Hero-Bereich ist öffentlich; alles darunter
+wird clientseitig über ein Passwort-Gate (`src/components/PasswordGate.astro`)
+freigeschaltet. Das ist Sichtschutz, keine echte Zugriffskontrolle — für harten
+Schutz die auskommentierte Edge Function in `netlify.toml` reaktivieren
+(`netlify/edge-functions/auth.ts`, Umgebungsvariable `SITE_PASSWORD`).
 `public/robots.txt` steht aktuell auf `Disallow: /`.
