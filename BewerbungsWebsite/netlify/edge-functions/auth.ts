@@ -149,4 +149,4 @@ export default async function auth(request: Request, context: Context) {
   return loginPage(false);
 }
 
-export const config = { path: "/*" };
+// export const config = { path: "/*" };
