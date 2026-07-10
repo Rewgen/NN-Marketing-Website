@@ -26,8 +26,12 @@ const { skills, projects } = Astro.props;
 
 <Hero />
 
-{/* Alles unterhalb des Heros ist bis zur Passworteingabe ausgeblendet */}
-<div id="gate-content" hidden>
+{/*
+  Alles unterhalb des Heros ist bis zur Passworteingabe ausgeblendet.
+  data-nosnippet weist Google an, diesen Inhalt nicht in den Suchergebnissen
+  (Snippets) anzuzeigen — gefunden wird die Seite über den öffentlichen Hero.
+*/}
+<div id="gate-content" data-nosnippet hidden>
   <About />
   <Skills items={skills} />
   <Projects items={projects} />
